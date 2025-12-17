@@ -84,3 +84,21 @@ Entrega de código fuente organizado y pequeño documento que explique la estruc
 
 Adjunto
 He incluido un diseño propuesto que especifica: paleta de colores, ubicación de botones Editar/Eliminar y estructura de la tarjeta. El proveedor deberá respetar la propuesta visual y comunicar cualquier ajuste necesario por restricciones técnicas.
+# Funcionamiento y explicaciones (EN POCAS PALABRAS):📝
+-Las tareas se visualizan mediante tarjetas individuales que muestran título, materia, fecha, prioridad y estado.
+Cada tarjeta incluye indicadores visuales de prioridad y estado, así como un botón ‘Ver más’ que permite expandir la descripción completa.
+La aplicación permite filtrar tareas por prioridad y ordenarlas por fecha o nivel de prioridad, cumpliendo con los criterios de visualización solicitados.
+
+-El proyecto utiliza localStorage para almacenar las tareas de manera persistente en el navegador. Cada vez que el usuario crea, edita, elimina o mueve una tarea, la información se guarda automáticamente. Al cargar la página, los datos almacenados se recuperan y se muestran nuevamente, permitiendo que el sistema conserve la información sin necesidad de una base de datos externa.
+
+# Estructura de JSON:
+La aplicación Tasky – Sistema de Gestión de Tareas utiliza el localStorage del navegador para almacenar las tareas de forma persistente. La información se guarda bajo la clave tasks, cuyo valor es un arreglo de objetos en formato JSON. Cada objeto representa una tarea individual dentro del sistema.
+
+La estructura del JSON está compuesta por varios campos que describen completamente una tarea. El campo id es un número único que permite identificar cada tarea de manera individual; este valor se genera utilizando Date.now() o se reutiliza cuando la tarea es editada. El campo title almacena el título de la tarea y es de tipo texto. El campo subject indica la materia o área asignada a la tarea, también en formato de texto.
+
+El campo dueDate guarda la fecha límite de entrega en formato YYYY-MM-DD, lo que permite ordenar y comparar fechas correctamente dentro del sistema. El campo priority define el nivel de importancia de la tarea y puede tomar los valores Alta, Media o Baja, los cuales se utilizan tanto para el ordenamiento como para la visualización mediante colores.
+
+El campo status representa el estado actual de la tarea dentro del tablero Kanban y puede ser Pendiente, Entregada o Retrasada. Este valor determina en qué columna se mostrará la tarea dentro de la interfaz. Finalmente, el campo description contiene una descripción detallada de la tarea y permite ampliar la información más allá del título.
+
+Todas las tareas se almacenan dentro de un arreglo JSON y se guardan en el localStorage utilizando JSON.stringify(). Cuando la aplicación se carga, los datos se recuperan mediante JSON.parse() y se renderizan automáticamente en la interfaz, permitiendo que la información persista incluso después de cerrar o recargar el navegador.
+
