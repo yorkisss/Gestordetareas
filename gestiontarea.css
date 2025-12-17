@@ -1,27 +1,18 @@
-/* ================================
-   VARIABLES DE COLOR
-================================ */
 :root {
     --primary: #4f46e5;
     --background: #f4f6fb;
     --sidebar-bg: #111827;
     --sidebar-text: #e5e7eb;
-
     --card-bg: #ffffff;
     --border: #e5e7eb;
-
     --high: #dc2626;
     --medium: #f59e0b;
     --low: #16a34a;
-
     --pending: #3b82f6;
     --completed: #10b981;
     --overdue: #ef4444;
 }
 
-/* ================================
-   RESET
-================================ */
 * {
     margin: 0;
     padding: 0;
@@ -34,17 +25,11 @@ body {
     color: #111827;
 }
 
-/* ================================
-   LAYOUT
-================================ */
 .app-layout {
     display: flex;
     min-height: 100vh;
 }
 
-/* ================================
-   SIDEBAR
-================================ */
 .sidebar {
     width: 220px;
     background-color: var(--sidebar-bg);
@@ -75,17 +60,11 @@ body {
     background-color: #1f2937;
 }
 
-/* ================================
-   MAIN
-================================ */
 .main-content {
     flex: 1;
     padding: 20px;
 }
 
-/* ================================
-   HEADER
-================================ */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -99,9 +78,6 @@ body {
     border: 1px solid var(--border);
 }
 
-/* ================================
-   BOTONES
-================================ */
 button {
     border: none;
     cursor: pointer;
@@ -114,9 +90,6 @@ button {
     border-radius: 6px;
 }
 
-/* ================================
-   FORMULARIO
-================================ */
 #task-form-section {
     background-color: white;
     padding: 20px;
@@ -149,9 +122,6 @@ button {
     border: 1px solid var(--border);
 }
 
-/* ================================
-   COLUMNAS KANBAN
-================================ */
 .task-columns-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -169,9 +139,6 @@ button {
     outline: 2px dashed var(--primary);
 }
 
-/* ================================
-   TARJETAS
-================================ */
 .task-card {
     background-color: var(--card-bg);
     border-radius: 10px;
@@ -191,9 +158,6 @@ button {
     justify-content: space-between;
 }
 
-/* ================================
-   BADGES (COINCIDEN CON JS)
-================================ */
 .badge {
     padding: 4px 8px;
     font-size: 0.75rem;
@@ -201,19 +165,14 @@ button {
     color: white;
 }
 
-/* PRIORIDAD */
 .priority.alta { background-color: var(--high); }
 .priority.media { background-color: var(--medium); }
 .priority.baja { background-color: var(--low); }
 
-/* ESTADO */
 .status.pendiente { background-color: var(--pending); }
 .status.entregada { background-color: var(--completed); }
 .status.retrasada { background-color: var(--overdue); }
 
-/* ================================
-   CONTENIDO
-================================ */
 .task-title {
     margin: 8px 0 4px;
     font-size: 1rem;
@@ -224,18 +183,12 @@ button {
     color: #6b7280;
 }
 
-
-
-/* FOOTER */
 .task-footer {
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
 @media (max-width: 1024px) {
     .task-columns-container {
         grid-template-columns: repeat(2, 1fr);

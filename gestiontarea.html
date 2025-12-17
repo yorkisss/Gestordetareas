@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="gestiontarea.css">
 
     <style>
-        /* Íconos simples (nivel académico) */
         .icon {
             font-size: 1.2rem;
         }
@@ -17,7 +16,6 @@
 <body>
 <div class="app-layout">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="logo">Yorkis Tasky</div>
         <nav>
@@ -30,10 +28,8 @@
         </nav>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
 
-        <!-- HEADER -->
         <header class="main-header">
             <div class="search-bar">
                 <input type="search" id="search-input" placeholder="Buscar tareas">
@@ -48,7 +44,6 @@
             </div>
         </header>
 
-        <!-- FORMULARIO -->
         <section id="task-form-section" style="display:none;">
             <h2 id="form-title">Registrar Nueva Tarea</h2>
 
@@ -83,12 +78,11 @@
 
                 <div class="form-group">
                     <label>Estado</label>
-                   <select id="task-status" name="status">
-    <option value="Pendiente (In Progress)">Pendiente (In Progress)</option>
-    <option value="Entregada (Completed Task)">Entregada (Completed Task)</option>
-    <option value="Retrasada (Over-Due)">Retrasada (Over-Due)</option>
-</select>
-
+                    <select id="task-status" name="status">
+                        <option value="Pendiente (In Progress)">Pendiente (In Progress)</option>
+                        <option value="Entregada (Completed Task)">Entregada (Completed Task)</option>
+                        <option value="Retrasada (Over-Due)">Retrasada (Over-Due)</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -101,7 +95,6 @@
             </form>
         </section>
 
-        <!-- CONTROLES -->
         <section class="task-controls">
             <label>Filtrar:</label>
             <select id="filter-priority">
@@ -115,12 +108,10 @@
             <button id="sort-priority-btn">Ordenar por Prioridad ↓</button>
         </section>
 
-        <!-- KANBAN -->
         <section>
             <h2>Tareas del Proyecto</h2>
 
             <div class="task-columns-container">
-
                 <div id="column-pending" class="task-column">
                     <h3>In Progress (<span id="count-pending">0</span>)</h3>
                 </div>
@@ -132,14 +123,12 @@
                 <div id="column-overdue" class="task-column">
                     <h3>Over-Due (<span id="count-overdue">0</span>)</h3>
                 </div>
-
             </div>
         </section>
 
     </main>
 </div>
 
-<!-- PLANTILLA TARJETA -->
 <template id="task-card-template">
     <div class="task-card">
         <div class="task-card-header">
@@ -166,7 +155,6 @@
     </div>
 </template>
 
-<!-- MODAL VER MÁS -->
 <div id="task-modal" class="modal hidden">
     <div class="modal-content">
         <header class="modal-header">
