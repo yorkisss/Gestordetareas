@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasky | Sistema de Gestión de Tareas</title>
+    <link rel="stylesheet" href="gestiontarea.css">
+
+    <style>
+        /* Íconos simples (nivel académico) */
+        .icon {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">Yorkis Tasky</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active"><span class="icon">🏠</span> Dashboard</a></li>
+                <li><a href="#"><span class="icon">✅</span> Tasks</a></li>
+                <li><a href="#"><span class="icon">📅</span> Calendar</a></li>
+                <li><a href="#"><span class="icon">👥</span> Members</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="main-header">
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Buscar tareas">
+            </div>
+
+            <div class="user-controls">
+                <span class="icon">🔔</span>
+                <span class="icon">👤</span>
+                <button id="show-form-btn" class="btn-primary">
+                    <span class="icon">➕</span> Add task
+                </button>
+            </div>
+        </header>
+
+        <!-- FORMULARIO -->
+        <section id="task-form-section" style="display:none;">
+            <h2 id="form-title">Registrar Nueva Tarea</h2>
+
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Título</label>
+                        <input type="text" id="task-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Materia</label>
+                        <input type="text" id="task-subject" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha de entrega</label>
+                        <input type="date" id="task-due-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        <select id="task-priority">
+                            <option>Baja</option>
+                            <option>Media</option>
+                            <option>Alta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Estado</label>
+                   <select id="task-status" name="status">
+    <option value="Pendiente (In Progress)">Pendiente (In Progress)</option>
+    <option value="Entregada (Completed Task)">Entregada (Completed Task)</option>
+    <option value="Retrasada (Over-Due)">Retrasada (Over-Due)</option>
+</select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea id="task-description" required></textarea>
+                </div>
+
+                <button class="btn-primary" type="submit">Guardar</button>
+                <button type="button" id="cancel-edit-btn" class="control-buttons">Cancelar</button>
+            </form>
+        </section>
+
+        <!-- CONTROLES -->
+        <section class="task-controls">
+            <label>Filtrar:</label>
+            <select id="filter-priority">
+                <option value="">Todas</option>
+                <option>Alta</option>
+                <option>Media</option>
+                <option>Baja</option>
+            </select>
+
+            <button id="sort-date-btn">Ordenar por Fecha ↓</button>
+            <button id="sort-priority-btn">Ordenar por Prioridad ↓</button>
+        </section>
+
+        <!-- KANBAN -->
+        <section>
+            <h2>Tareas del Proyecto</h2>
+
+            <div class="task-columns-container">
+
+                <div id="column-pending" class="task-column">
+                    <h3>In Progress (<span id="count-pending">0</span>)</h3>
+                </div>
+
+                <div id="column-completed" class="task-column">
+                    <h3>Completed Task (<span id="count-completed">0</span>)</h3>
+                </div>
+
+                <div id="column-overdue" class="task-column">
+                    <h3>Over-Due (<span id="count-overdue">0</span>)</h3>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- PLANTILLA TARJETA -->
+<template id="task-card-template">
+    <div class="task-card">
+        <div class="task-card-header">
+            <span class="badge priority">Alta</span>
+            <span class="task-date">2025-12-31</span>
+
+            <div class="task-actions">
+                <button class="btn-edit">✏️</button>
+                <button class="btn-delete">🗑️</button>
+            </div>
+        </div>
+
+        <h4 class="task-title">Título</h4>
+        <p class="task-subject">Materia</p>
+
+        <p class="task-description short">
+            Descripción corta de la tarea...
+        </p>
+
+        <div class="task-footer">
+            <span class="badge status">In Progress</span>
+            <button class="btn-view-more">Ver más</button>
+        </div>
+    </div>
+</template>
+
+<!-- MODAL VER MÁS -->
+<div id="task-modal" class="modal hidden">
+    <div class="modal-content">
+        <header class="modal-header">
+            <h3 id="modal-title"></h3>
+            <button id="close-modal-btn">✖</button>
+        </header>
+
+        <div class="modal-body">
+            <p><strong>Materia:</strong> <span id="modal-subject"></span></p>
+            <p><strong>Fecha:</strong> <span id="modal-date"></span></p>
+            <p><strong>Prioridad:</strong> <span id="modal-priority"></span></p>
+            <p><strong>Estado:</strong> <span id="modal-status"></span></p>
+            <hr>
+            <p id="modal-description"></p>
+        </div>
+
+        <footer class="modal-footer">
+            <button id="modal-edit-btn" class="btn-primary">Editar</button>
+            <button id="modal-close-btn" class="control-buttons">Cerrar</button>
+        </footer>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
